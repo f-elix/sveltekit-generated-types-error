@@ -1,6 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+import { lang, auth, cart } from '$lib/api/handles';
 
-export const handle: Handle = ({ event, resolve }) => {
-	console.log(event.url.pathname);
-	return resolve(event);
-};
+export const handle: Handle = sequence(lang, auth, cart);
